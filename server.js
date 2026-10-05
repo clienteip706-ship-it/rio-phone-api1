@@ -1,6 +1,9 @@
 const http = require("http");
 require("dotenv").config();
-const youtubeDl = require("youtube-dl-exec");
+const youtubeDlModule = require("youtube-dl-exec");
+const youtubeDl = process.env.YT_DLP_PATH
+  ? youtubeDlModule.create(process.env.YT_DLP_PATH)
+  : youtubeDlModule;
 const ytSearch = require("yt-search");
 
 const host = process.env.RIO_SPOTIFY_HOST || "0.0.0.0";
@@ -183,7 +186,7 @@ async function handlePlay(req, res, url) {
     getUrl: true,
     format: "bestaudio[ext=webm]/bestaudio[ext=mp3]",
     noWarnings: true,
-    noCallHome: true,
+    jsRuntimes: "node",
     socketTimeout: 15,
   }, { timeout: 30000 });
 
