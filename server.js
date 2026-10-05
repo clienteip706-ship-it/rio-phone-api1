@@ -185,7 +185,7 @@ async function handlePlay(req, res, url) {
   const output = await youtubeDl(`https://www.youtube.com/watch?v=${id}`, {
     getUrl: true,
     format: "bestaudio[ext=webm]/bestaudio[ext=mp3]",
-    noWarnings: true,
+    verbose: true,
     jsRuntimes: "node",
     socketTimeout: 15,
   }, { timeout: 30000 });
